@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>음악 감상 수행평가 연습</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>음악 감상 퀴즈</h1>
+      <p>음원을 등록하고, 제목·작곡가·시대·연주형태를 랜덤으로 연습해 보세요.</p>
+    </header>
+
+    <section id="setupView" class="view">
+      <div class="card">
+        <h2>음원 등록</h2>
+        <p class="muted">음악 파일을 하나씩 추가하고 정보를 입력하세요.</p>
+        <form id="songForm">
+          <label>음원 파일
+            <input id="audioFile" type="file" accept="audio/*" required>
+          </label>
+          <label>곡명
+            <input id="title" type="text" placeholder="예: 사계" required>
+          </label>
+          <label>작곡가
+            <input id="composer" type="text" placeholder="예: 비발디" required>
+          </label>
+          <label>시대
+            <input id="era" type="text" placeholder="예: 바로크" required>
+          </label>
+          <label>연주형태
+            <input id="form" type="text" placeholder="예: 협주곡" required>
+          </label>
+          <button class="primary" type="submit">음원 저장</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="row between">
+          <h2>등록된 곡 <span id="songCount" class="badge">0</span></h2>
+          <button id="startQuiz" class="primary" disabled>퀴즈 시작</button>
+        </div>
+        <div id="songList" class="song-list"></div>
+        <button id="clearAll" class="danger ghost">전체 삭제</button>
+      </div>
+    </section>
+
+    <section id="quizView" class="view hidden">
+      <div class="quiz-top row between">
+        <span id="progress">1 / 1</span>
+        <span id="score">점수 0</span>
+      </div>
+
+      <div class="card quiz-card">
+        <div id="questionType" class="question-type">곡명</div>
+        <h2 id="question">이 음악의 곡명은?</h2>
+
+        <button id="playButton" class="play-button" aria-label="음악 재생">
+          <span id="playIcon">▶</span>
+          <span id="playText">음악 듣기</span>
+        </button>
+        <audio id="audioPlayer" preload="auto"></audio>
+        <p class="muted center">정답을 고르기 전까지 몇 번이든 들을 수 있습니다.</p>
+
+        <div id="options" class="options"></div>
+        <div id="feedback" class="feedback hidden"></div>
+        <button id="nextButton" class="primary wide hidden">다음 문제</button>
+      </div>
+
+      <button id="quitQuiz" class="ghost">퀴즈 종료</button>
+    </section>
+
+    <section id="resultView" class="view hidden">
+      <div class="card result-card">
+        <div class="result-icon">♪</div>
+        <h2>한 사이클 완료!</h2>
+        <div id="finalScore" class="final-score"></div>
+        <p id="resultMessage"></p>
+        <div id="resultStats" class="stats"></div>
+        <button id="retryQuiz" class="primary wide">다시 풀기</button>
+        <button id="backToSetup" class="ghost wide">곡 관리로 돌아가기</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
